@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+cd $(dirname "${BASH_SOURCE[0]}")
+./regen-db-models
+./regen-api-models

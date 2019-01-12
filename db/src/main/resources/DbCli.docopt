@@ -1,0 +1,14 @@
+Db Cli
+
+Usage:
+  dbcli migrate [--port=<port>] [--db=<db>]
+  dbcli start [--port=<port>] [--db=<db>] [--migrate]
+  dbcli -h | --help
+  dbcli --version
+
+Options:
+  -p --port=<port>    Port to start/build jdbc url on [default: 9092].
+  -d --db=<db>        Database to use [default: mem:db].
+  -m --migrate        Migrate when starting [default: true].
+  -h --help           Show this screen.
+  --version           Show version.
