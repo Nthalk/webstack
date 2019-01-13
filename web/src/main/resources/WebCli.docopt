@@ -1,6 +1,7 @@
 Web Cli
 
 Usage:
+  webcli
   webcli start [--port=<port>] [--jdbcurl=<jdbcurl>] [--migrate]
   webcli -h | --help
   webcli --version

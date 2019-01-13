@@ -22,10 +22,10 @@ This is a starter project for using spring-boot, h2database, jooq, jooq-models, 
 ## Todo:
 
 - [ ] Add executable assemblies for db/web
-- [ ] Add home directory
+- [x] Add home directory
 - [ ] Add configurable logging
-- [ ] Add atomix
-- [ ] Add messaging / queues
-- [ ] Add websockets
+- [x] Add atomix
+- [ ] Add messaging / queues (use atomix)
+- [ ] Add websockets (use atomix)
 - [ ] Add a react-native project (android)
 - [ ] Add a react-native project (ios)

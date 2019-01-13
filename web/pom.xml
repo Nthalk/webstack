@@ -13,7 +13,7 @@
   <artifactId>web</artifactId>
 
   <properties>
-    <spring-boot.version>2.1.0.RELEASE</spring-boot.version>
+    <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
     <failOnMissingWebXml>false</failOnMissingWebXml>
   </properties>
 
@@ -28,7 +28,7 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-        <version>2.0.6.RELEASE</version>
+        <version>${spring-boot.version}</version>
       </plugin>
       <plugin>
         <groupId>cz.habarta.typescript-generator</groupId>
@@ -50,7 +50,7 @@
           </classPatterns>
           <customTypeNamingFunction>
             function(name, simpleName) {
-              if (name.contains(".pojos.")) return simpleName + "Pojo";
+            if (name.contains(".pojos.")) return simpleName + "Pojo";
             }
           </customTypeNamingFunction>
           <noFileComment>true</noFileComment>
@@ -121,6 +121,17 @@
 
   <dependencies>
     <dependency>
+      <groupId>io.atomix</groupId>
+      <artifactId>atomix</artifactId>
+      <version>3.1.4</version>
+    </dependency>
+    <dependency>
+      <groupId>io.atomix</groupId>
+      <artifactId>atomix-raft</artifactId>
+      <version>3.1.4</version>
+    </dependency>
+
+    <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>db</artifactId>
       <version>${project.version}</version>
@@ -137,12 +148,24 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <version>${spring-boot.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
       <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
+      <version>${spring-boot.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
       <version>${spring-boot.version}</version>
       <optional>true</optional>
     </dependency>

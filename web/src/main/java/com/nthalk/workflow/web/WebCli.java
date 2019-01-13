@@ -1,5 +1,6 @@
 package com.nthalk.workflow.web;
 
+import com.nthalk.workflow.web.config.AppConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import java.io.IOException;
 import java.util.Map;
@@ -14,11 +15,18 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
 import org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration;
+import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(
-    exclude = {FlywayAutoConfiguration.class, JooqAutoConfiguration.class},
+    exclude = {
+      FlywayAutoConfiguration.class,
+      JooqAutoConfiguration.class,
+      ErrorMvcAutoConfiguration.class
+    },
     scanBasePackages = "com.nthalk.workflow.web")
+@EnableConfigurationProperties(AppConfig.class)
 public class WebCli {
 
   public static void main(String[] args) throws IOException {
@@ -32,6 +40,11 @@ public class WebCli {
     Map<String, Object> opts = docopt.parse(args);
     System.setProperty("server.port", (String) opts.get("--port"));
     System.setProperty("migrate", (Boolean) opts.get("--migrate") ? "true" : "false");
+
+    String home = System.getProperty("home", "./home");
+    System.setProperty(
+        "spring.config.location",
+        "classpath:application.properties,file:" + home + "/application.properties");
 
     SpringApplication.run(WebCli.class, args);
   }
