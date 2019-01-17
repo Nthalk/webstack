@@ -28,45 +28,45 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowStateRecord extends UpdatableRecordImpl<WorkflowStateRecord> implements Record3<Integer, Integer, String> {
 
-    private static final long serialVersionUID = -587829870;
+    private static final long serialVersionUID = 1802127158;
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_STATE.WORKFLOW_STATE_ID</code>.
+     * Setter for <code>workflow_state.workflow_state_id</code>.
      */
     public void setWorkflowStateId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_STATE.WORKFLOW_STATE_ID</code>.
+     * Getter for <code>workflow_state.workflow_state_id</code>.
      */
     public Integer getWorkflowStateId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_STATE.WORKFLOW_ID</code>.
+     * Setter for <code>workflow_state.workflow_id</code>.
      */
     public void setWorkflowId(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_STATE.WORKFLOW_ID</code>.
+     * Getter for <code>workflow_state.workflow_id</code>.
      */
     public Integer getWorkflowId() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_STATE.NAME</code>.
+     * Setter for <code>workflow_state.name</code>.
      */
     public void setName(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_STATE.NAME</code>.
+     * Getter for <code>workflow_state.name</code>.
      */
     public String getName() {
         return (String) get(2);

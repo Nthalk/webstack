@@ -30,73 +30,73 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowTransitionEventRecord extends UpdatableRecordImpl<WorkflowTransitionEventRecord> implements Record5<Integer, Integer, String, Timestamp, String> {
 
-    private static final long serialVersionUID = 1573605527;
+    private static final long serialVersionUID = -353089735;
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID</code>.
+     * Setter for <code>workflow_transition_event.workflow_transition_event_id</code>.
      */
     public void setWorkflowTransitionEventId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID</code>.
+     * Getter for <code>workflow_transition_event.workflow_transition_event_id</code>.
      */
     public Integer getWorkflowTransitionEventId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_ID</code>.
+     * Setter for <code>workflow_transition_event.workflow_transition_id</code>.
      */
     public void setWorkflowTransitionId(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_ID</code>.
+     * Getter for <code>workflow_transition_event.workflow_transition_id</code>.
      */
     public Integer getWorkflowTransitionId() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.INSTANCE_KEY</code>.
+     * Setter for <code>workflow_transition_event.instance_key</code>.
      */
     public void setInstanceKey(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.INSTANCE_KEY</code>.
+     * Getter for <code>workflow_transition_event.instance_key</code>.
      */
     public String getInstanceKey() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.TRANSITIONED_AT</code>.
+     * Setter for <code>workflow_transition_event.transitioned_at</code>.
      */
     public void setTransitionedAt(Timestamp value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.TRANSITIONED_AT</code>.
+     * Getter for <code>workflow_transition_event.transitioned_at</code>.
      */
     public Timestamp getTransitionedAt() {
         return (Timestamp) get(3);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.DATA</code>.
+     * Setter for <code>workflow_transition_event.data</code>.
      */
     public void setData(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.DATA</code>.
+     * Getter for <code>workflow_transition_event.data</code>.
      */
     public String getData() {
         return (String) get(4);

@@ -1,30 +1,17 @@
 package com.nthalk.workflow.web;
 
 import com.nthalk.workflow.web.config.AppConfig;
-import com.zaxxer.hikari.HikariDataSource;
 import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
-import javax.sql.DataSource;
 import org.docopt.Docopt;
-import org.jooq.DSLContext;
-import org.jooq.SQLDialect;
-import org.jooq.impl.DefaultDSLContext;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.flyway.FlywayAutoConfiguration;
-import org.springframework.boot.autoconfigure.jooq.JooqAutoConfiguration;
 import org.springframework.boot.autoconfigure.web.servlet.error.ErrorMvcAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(
-    exclude = {
-      FlywayAutoConfiguration.class,
-      JooqAutoConfiguration.class,
-      ErrorMvcAutoConfiguration.class
-    },
+    exclude = {ErrorMvcAutoConfiguration.class},
     scanBasePackages = "com.nthalk.workflow.web")
 @EnableConfigurationProperties(AppConfig.class)
 public class WebCli {
@@ -47,17 +34,5 @@ public class WebCli {
         "classpath:application.properties,file:" + home + "/application.properties");
 
     SpringApplication.run(WebCli.class, args);
-  }
-
-  @Bean
-  DataSource dataSource(@Value("${jdbc.url}") String jdbcurl) {
-    HikariDataSource dataSource = new HikariDataSource();
-    dataSource.setJdbcUrl(jdbcurl);
-    return dataSource;
-  }
-
-  @Bean
-  DSLContext db(DataSource dataSource) {
-    return new DefaultDSLContext(dataSource, SQLDialect.H2);
   }
 }

@@ -4,9 +4,9 @@
 package com.nthalk.workflow.db.models.tables;
 
 
+import com.nthalk.workflow.db.models.DefaultSchema;
 import com.nthalk.workflow.db.models.Indexes;
 import com.nthalk.workflow.db.models.Keys;
-import com.nthalk.workflow.db.models.Public;
 import com.nthalk.workflow.db.models.tables.records.WorkflowTransitionRecord;
 
 import java.util.Arrays;
@@ -41,10 +41,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
 
-    private static final long serialVersionUID = 1974571965;
+    private static final long serialVersionUID = 1624271894;
 
     /**
-     * The reference instance of <code>PUBLIC.WORKFLOW_TRANSITION</code>
+     * The reference instance of <code>workflow_transition</code>
      */
     public static final WorkflowTransition WORKFLOW_TRANSITION = new WorkflowTransition();
 
@@ -57,46 +57,46 @@ public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID</code>.
+     * The column <code>workflow_transition.workflow_transition_id</code>.
      */
-    public final TableField<WorkflowTransitionRecord, Integer> WORKFLOW_TRANSITION_ID = createField("WORKFLOW_TRANSITION_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<WorkflowTransitionRecord, Integer> WORKFLOW_TRANSITION_ID = createField("workflow_transition_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('workflow_transition_workflow_transition_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION.WORKFLOW_ID</code>.
+     * The column <code>workflow_transition.workflow_id</code>.
      */
-    public final TableField<WorkflowTransitionRecord, Integer> WORKFLOW_ID = createField("WORKFLOW_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<WorkflowTransitionRecord, Integer> WORKFLOW_ID = createField("workflow_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION.NAME</code>.
+     * The column <code>workflow_transition.name</code>.
      */
-    public final TableField<WorkflowTransitionRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowTransitionRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION.FROM_WORKFLOW_STATE_ID</code>.
+     * The column <code>workflow_transition.from_workflow_state_id</code>.
      */
-    public final TableField<WorkflowTransitionRecord, Integer> FROM_WORKFLOW_STATE_ID = createField("FROM_WORKFLOW_STATE_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<WorkflowTransitionRecord, Integer> FROM_WORKFLOW_STATE_ID = createField("from_workflow_state_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION.TO_WORKFLOW_STATE_ID</code>.
+     * The column <code>workflow_transition.to_workflow_state_id</code>.
      */
-    public final TableField<WorkflowTransitionRecord, Integer> TO_WORKFLOW_STATE_ID = createField("TO_WORKFLOW_STATE_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<WorkflowTransitionRecord, Integer> TO_WORKFLOW_STATE_ID = createField("to_workflow_state_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * Create a <code>PUBLIC.WORKFLOW_TRANSITION</code> table reference
+     * Create a <code>workflow_transition</code> table reference
      */
     public WorkflowTransition() {
-        this(DSL.name("WORKFLOW_TRANSITION"), null);
+        this(DSL.name("workflow_transition"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW_TRANSITION</code> table reference
+     * Create an aliased <code>workflow_transition</code> table reference
      */
     public WorkflowTransition(String alias) {
         this(DSL.name(alias), WORKFLOW_TRANSITION);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW_TRANSITION</code> table reference
+     * Create an aliased <code>workflow_transition</code> table reference
      */
     public WorkflowTransition(Name alias) {
         this(alias, WORKFLOW_TRANSITION);
@@ -119,7 +119,7 @@ public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**
@@ -127,7 +127,7 @@ public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.CONSTRAINT_INDEX_4, Indexes.CONSTRAINT_INDEX_48, Indexes.CONSTRAINT_INDEX_48B, Indexes.PRIMARY_KEY_4);
+        return Arrays.<Index>asList(Indexes.WORKFLOW_TRANSITION_PKEY);
     }
 
     /**
@@ -143,7 +143,7 @@ public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
      */
     @Override
     public UniqueKey<WorkflowTransitionRecord> getPrimaryKey() {
-        return Keys.CONSTRAINT_4;
+        return Keys.WORKFLOW_TRANSITION_PKEY;
     }
 
     /**
@@ -151,7 +151,7 @@ public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
      */
     @Override
     public List<UniqueKey<WorkflowTransitionRecord>> getKeys() {
-        return Arrays.<UniqueKey<WorkflowTransitionRecord>>asList(Keys.CONSTRAINT_4);
+        return Arrays.<UniqueKey<WorkflowTransitionRecord>>asList(Keys.WORKFLOW_TRANSITION_PKEY);
     }
 
     /**
@@ -159,19 +159,19 @@ public class WorkflowTransition extends TableImpl<WorkflowTransitionRecord> {
      */
     @Override
     public List<ForeignKey<WorkflowTransitionRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<WorkflowTransitionRecord, ?>>asList(Keys.CONSTRAINT_48, Keys.CONSTRAINT_48B, Keys.CONSTRAINT_48B9);
+        return Arrays.<ForeignKey<WorkflowTransitionRecord, ?>>asList(Keys.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_WORKFLOW_ID_FKEY, Keys.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_FROM_WORKFLOW_STATE_ID_FKEY, Keys.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_TO_WORKFLOW_STATE_ID_FKEY);
     }
 
     public Workflow workflow() {
-        return new Workflow(this, Keys.CONSTRAINT_48);
+        return new Workflow(this, Keys.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_WORKFLOW_ID_FKEY);
     }
 
-    public WorkflowState constraint_48b() {
-        return new WorkflowState(this, Keys.CONSTRAINT_48B);
+    public WorkflowState workflowTransition_WorkflowTransitionFromWorkflowStateIdFkey() {
+        return new WorkflowState(this, Keys.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_FROM_WORKFLOW_STATE_ID_FKEY);
     }
 
-    public WorkflowState constraint_48b9() {
-        return new WorkflowState(this, Keys.CONSTRAINT_48B9);
+    public WorkflowState workflowTransition_WorkflowTransitionToWorkflowStateIdFkey() {
+        return new WorkflowState(this, Keys.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_TO_WORKFLOW_STATE_ID_FKEY);
     }
 
     /**

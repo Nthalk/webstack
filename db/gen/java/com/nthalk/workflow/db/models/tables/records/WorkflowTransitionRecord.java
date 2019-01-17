@@ -28,73 +28,73 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowTransitionRecord extends UpdatableRecordImpl<WorkflowTransitionRecord> implements Record5<Integer, Integer, String, Integer, Integer> {
 
-    private static final long serialVersionUID = -453266384;
+    private static final long serialVersionUID = 434579472;
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID</code>.
+     * Setter for <code>workflow_transition.workflow_transition_id</code>.
      */
     public void setWorkflowTransitionId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID</code>.
+     * Getter for <code>workflow_transition.workflow_transition_id</code>.
      */
     public Integer getWorkflowTransitionId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION.WORKFLOW_ID</code>.
+     * Setter for <code>workflow_transition.workflow_id</code>.
      */
     public void setWorkflowId(Integer value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION.WORKFLOW_ID</code>.
+     * Getter for <code>workflow_transition.workflow_id</code>.
      */
     public Integer getWorkflowId() {
         return (Integer) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION.NAME</code>.
+     * Setter for <code>workflow_transition.name</code>.
      */
     public void setName(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION.NAME</code>.
+     * Getter for <code>workflow_transition.name</code>.
      */
     public String getName() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION.FROM_WORKFLOW_STATE_ID</code>.
+     * Setter for <code>workflow_transition.from_workflow_state_id</code>.
      */
     public void setFromWorkflowStateId(Integer value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION.FROM_WORKFLOW_STATE_ID</code>.
+     * Getter for <code>workflow_transition.from_workflow_state_id</code>.
      */
     public Integer getFromWorkflowStateId() {
         return (Integer) get(3);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW_TRANSITION.TO_WORKFLOW_STATE_ID</code>.
+     * Setter for <code>workflow_transition.to_workflow_state_id</code>.
      */
     public void setToWorkflowStateId(Integer value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW_TRANSITION.TO_WORKFLOW_STATE_ID</code>.
+     * Getter for <code>workflow_transition.to_workflow_state_id</code>.
      */
     public Integer getToWorkflowStateId() {
         return (Integer) get(4);

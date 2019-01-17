@@ -8,20 +8,9 @@ import org.springframework.context.annotation.Bean;
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
 
-  private ClusterConfig cluster;
-
   @Bean
   public String getHome() {
     return System.getProperty("home", "./home");
-  }
-
-  @Bean
-  public ClusterConfig getCluster() {
-    return cluster;
-  }
-
-  public void setCluster(ClusterConfig cluster) {
-    this.cluster = cluster;
   }
 
   public static class ClusterNode {
@@ -51,18 +40,6 @@ public class AppConfig {
 
     public void setPort(Integer port) {
       this.port = port;
-    }
-  }
-
-  public static class ClusterConfig extends ClusterNode {
-    List<ClusterNode> nodes = new ArrayList<>();
-
-    public List<ClusterNode> getNodes() {
-      return nodes;
-    }
-
-    public void setNodes(List<ClusterNode> nodes) {
-      this.nodes = nodes;
     }
   }
 }

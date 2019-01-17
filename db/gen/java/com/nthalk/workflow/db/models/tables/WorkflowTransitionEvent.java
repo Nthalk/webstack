@@ -4,9 +4,9 @@
 package com.nthalk.workflow.db.models.tables;
 
 
+import com.nthalk.workflow.db.models.DefaultSchema;
 import com.nthalk.workflow.db.models.Indexes;
 import com.nthalk.workflow.db.models.Keys;
-import com.nthalk.workflow.db.models.Public;
 import com.nthalk.workflow.db.models.tables.records.WorkflowTransitionEventRecord;
 
 import java.sql.Timestamp;
@@ -42,10 +42,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRecord> {
 
-    private static final long serialVersionUID = -819209182;
+    private static final long serialVersionUID = 258462408;
 
     /**
-     * The reference instance of <code>PUBLIC.WORKFLOW_TRANSITION_EVENT</code>
+     * The reference instance of <code>workflow_transition_event</code>
      */
     public static final WorkflowTransitionEvent WORKFLOW_TRANSITION_EVENT = new WorkflowTransitionEvent();
 
@@ -58,46 +58,46 @@ public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRe
     }
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID</code>.
+     * The column <code>workflow_transition_event.workflow_transition_event_id</code>.
      */
-    public final TableField<WorkflowTransitionEventRecord, Integer> WORKFLOW_TRANSITION_EVENT_ID = createField("WORKFLOW_TRANSITION_EVENT_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<WorkflowTransitionEventRecord, Integer> WORKFLOW_TRANSITION_EVENT_ID = createField("workflow_transition_event_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('workflow_transition_event_workflow_transition_event_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_ID</code>.
+     * The column <code>workflow_transition_event.workflow_transition_id</code>.
      */
-    public final TableField<WorkflowTransitionEventRecord, Integer> WORKFLOW_TRANSITION_ID = createField("WORKFLOW_TRANSITION_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<WorkflowTransitionEventRecord, Integer> WORKFLOW_TRANSITION_ID = createField("workflow_transition_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.INSTANCE_KEY</code>.
+     * The column <code>workflow_transition_event.instance_key</code>.
      */
-    public final TableField<WorkflowTransitionEventRecord, String> INSTANCE_KEY = createField("INSTANCE_KEY", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowTransitionEventRecord, String> INSTANCE_KEY = createField("instance_key", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.TRANSITIONED_AT</code>.
+     * The column <code>workflow_transition_event.transitioned_at</code>.
      */
-    public final TableField<WorkflowTransitionEventRecord, Timestamp> TRANSITIONED_AT = createField("TRANSITIONED_AT", org.jooq.impl.SQLDataType.TIMESTAMP.precision(6), this, "");
+    public final TableField<WorkflowTransitionEventRecord, Timestamp> TRANSITIONED_AT = createField("transitioned_at", org.jooq.impl.SQLDataType.TIMESTAMP, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_TRANSITION_EVENT.DATA</code>.
+     * The column <code>workflow_transition_event.data</code>.
      */
-    public final TableField<WorkflowTransitionEventRecord, String> DATA = createField("DATA", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowTransitionEventRecord, String> DATA = createField("data", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * Create a <code>PUBLIC.WORKFLOW_TRANSITION_EVENT</code> table reference
+     * Create a <code>workflow_transition_event</code> table reference
      */
     public WorkflowTransitionEvent() {
-        this(DSL.name("WORKFLOW_TRANSITION_EVENT"), null);
+        this(DSL.name("workflow_transition_event"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW_TRANSITION_EVENT</code> table reference
+     * Create an aliased <code>workflow_transition_event</code> table reference
      */
     public WorkflowTransitionEvent(String alias) {
         this(DSL.name(alias), WORKFLOW_TRANSITION_EVENT);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW_TRANSITION_EVENT</code> table reference
+     * Create an aliased <code>workflow_transition_event</code> table reference
      */
     public WorkflowTransitionEvent(Name alias) {
         this(alias, WORKFLOW_TRANSITION_EVENT);
@@ -120,7 +120,7 @@ public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRe
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**
@@ -128,7 +128,7 @@ public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRe
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.CONSTRAINT_INDEX_4F, Indexes.PRIMARY_KEY_4F);
+        return Arrays.<Index>asList(Indexes.WORKFLOW_TRANSITION_EVENT_PKEY);
     }
 
     /**
@@ -144,7 +144,7 @@ public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRe
      */
     @Override
     public UniqueKey<WorkflowTransitionEventRecord> getPrimaryKey() {
-        return Keys.CONSTRAINT_4F;
+        return Keys.WORKFLOW_TRANSITION_EVENT_PKEY;
     }
 
     /**
@@ -152,7 +152,7 @@ public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRe
      */
     @Override
     public List<UniqueKey<WorkflowTransitionEventRecord>> getKeys() {
-        return Arrays.<UniqueKey<WorkflowTransitionEventRecord>>asList(Keys.CONSTRAINT_4F);
+        return Arrays.<UniqueKey<WorkflowTransitionEventRecord>>asList(Keys.WORKFLOW_TRANSITION_EVENT_PKEY);
     }
 
     /**
@@ -160,11 +160,11 @@ public class WorkflowTransitionEvent extends TableImpl<WorkflowTransitionEventRe
      */
     @Override
     public List<ForeignKey<WorkflowTransitionEventRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<WorkflowTransitionEventRecord, ?>>asList(Keys.CONSTRAINT_4F8);
+        return Arrays.<ForeignKey<WorkflowTransitionEventRecord, ?>>asList(Keys.WORKFLOW_TRANSITION_EVENT__WORKFLOW_TRANSITION_EVENT_WORKFLOW_TRANSITION_ID_FKEY);
     }
 
     public WorkflowTransition workflowTransition() {
-        return new WorkflowTransition(this, Keys.CONSTRAINT_4F8);
+        return new WorkflowTransition(this, Keys.WORKFLOW_TRANSITION_EVENT__WORKFLOW_TRANSITION_EVENT_WORKFLOW_TRANSITION_ID_FKEY);
     }
 
     /**

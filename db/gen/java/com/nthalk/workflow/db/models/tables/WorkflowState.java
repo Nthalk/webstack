@@ -4,9 +4,9 @@
 package com.nthalk.workflow.db.models.tables;
 
 
+import com.nthalk.workflow.db.models.DefaultSchema;
 import com.nthalk.workflow.db.models.Indexes;
 import com.nthalk.workflow.db.models.Keys;
-import com.nthalk.workflow.db.models.Public;
 import com.nthalk.workflow.db.models.tables.records.WorkflowStateRecord;
 
 import java.util.Arrays;
@@ -41,10 +41,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowState extends TableImpl<WorkflowStateRecord> {
 
-    private static final long serialVersionUID = -69202363;
+    private static final long serialVersionUID = 707606052;
 
     /**
-     * The reference instance of <code>PUBLIC.WORKFLOW_STATE</code>
+     * The reference instance of <code>workflow_state</code>
      */
     public static final WorkflowState WORKFLOW_STATE = new WorkflowState();
 
@@ -57,36 +57,36 @@ public class WorkflowState extends TableImpl<WorkflowStateRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_STATE.WORKFLOW_STATE_ID</code>.
+     * The column <code>workflow_state.workflow_state_id</code>.
      */
-    public final TableField<WorkflowStateRecord, Integer> WORKFLOW_STATE_ID = createField("WORKFLOW_STATE_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<WorkflowStateRecord, Integer> WORKFLOW_STATE_ID = createField("workflow_state_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('workflow_state_workflow_state_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_STATE.WORKFLOW_ID</code>.
+     * The column <code>workflow_state.workflow_id</code>.
      */
-    public final TableField<WorkflowStateRecord, Integer> WORKFLOW_ID = createField("WORKFLOW_ID", org.jooq.impl.SQLDataType.INTEGER, this, "");
+    public final TableField<WorkflowStateRecord, Integer> WORKFLOW_ID = createField("workflow_id", org.jooq.impl.SQLDataType.INTEGER, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW_STATE.NAME</code>.
+     * The column <code>workflow_state.name</code>.
      */
-    public final TableField<WorkflowStateRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowStateRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * Create a <code>PUBLIC.WORKFLOW_STATE</code> table reference
+     * Create a <code>workflow_state</code> table reference
      */
     public WorkflowState() {
-        this(DSL.name("WORKFLOW_STATE"), null);
+        this(DSL.name("workflow_state"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW_STATE</code> table reference
+     * Create an aliased <code>workflow_state</code> table reference
      */
     public WorkflowState(String alias) {
         this(DSL.name(alias), WORKFLOW_STATE);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW_STATE</code> table reference
+     * Create an aliased <code>workflow_state</code> table reference
      */
     public WorkflowState(Name alias) {
         this(alias, WORKFLOW_STATE);
@@ -109,7 +109,7 @@ public class WorkflowState extends TableImpl<WorkflowStateRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**
@@ -117,7 +117,7 @@ public class WorkflowState extends TableImpl<WorkflowStateRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.CONSTRAINT_INDEX_F, Indexes.PRIMARY_KEY_F);
+        return Arrays.<Index>asList(Indexes.WORKFLOW_STATE_PKEY);
     }
 
     /**
@@ -133,7 +133,7 @@ public class WorkflowState extends TableImpl<WorkflowStateRecord> {
      */
     @Override
     public UniqueKey<WorkflowStateRecord> getPrimaryKey() {
-        return Keys.CONSTRAINT_F;
+        return Keys.WORKFLOW_STATE_PKEY;
     }
 
     /**
@@ -141,7 +141,7 @@ public class WorkflowState extends TableImpl<WorkflowStateRecord> {
      */
     @Override
     public List<UniqueKey<WorkflowStateRecord>> getKeys() {
-        return Arrays.<UniqueKey<WorkflowStateRecord>>asList(Keys.CONSTRAINT_F);
+        return Arrays.<UniqueKey<WorkflowStateRecord>>asList(Keys.WORKFLOW_STATE_PKEY);
     }
 
     /**
@@ -149,11 +149,11 @@ public class WorkflowState extends TableImpl<WorkflowStateRecord> {
      */
     @Override
     public List<ForeignKey<WorkflowStateRecord, ?>> getReferences() {
-        return Arrays.<ForeignKey<WorkflowStateRecord, ?>>asList(Keys.CONSTRAINT_F2);
+        return Arrays.<ForeignKey<WorkflowStateRecord, ?>>asList(Keys.WORKFLOW_STATE__WORKFLOW_STATE_WORKFLOW_ID_FKEY);
     }
 
     public Workflow workflow() {
-        return new Workflow(this, Keys.CONSTRAINT_F2);
+        return new Workflow(this, Keys.WORKFLOW_STATE__WORKFLOW_STATE_WORKFLOW_ID_FKEY);
     }
 
     /**

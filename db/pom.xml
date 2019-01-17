@@ -13,7 +13,7 @@
   <artifactId>db</artifactId>
 
   <properties>
-    <jdbc.url>jdbc:h2:tcp://localhost:9092/mem:db</jdbc.url>
+    <jdbc.url>jdbc:postgresql://localhost:5432/webstack</jdbc.url>
   </properties>
 
   <build>
@@ -30,14 +30,18 @@
         <version>3.11.9</version>
         <configuration>
           <jdbc>
-            <driver>org.h2.Driver</driver>
+            <driver>org.postgresql.Driver</driver>
+            <username>webstack</username>
+            <password>webstack</password>
             <url>${jdbc.url}</url>
           </jdbc>
           <generator>
             <database>
-              <name>org.jooq.meta.h2.H2Database</name>
+              <name>org.jooq.meta.postgres.PostgresDatabase</name>
               <includes>.*</includes>
-              <inputSchema>PUBLIC</inputSchema>
+              <inputSchema>public</inputSchema>
+              <outputCatalogToDefault>true</outputCatalogToDefault>
+              <outputSchemaToDefault>true</outputSchemaToDefault>
             </database>
             <generate>
               <deprecated>false</deprecated>
@@ -63,7 +67,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.basedir}/gen</source>
+                <source>${project.basedir}/gen/java</source>
               </sources>
             </configuration>
           </execution>
@@ -78,19 +82,19 @@
       <version>0.6.0.20150202</version>
     </dependency>
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.197</version>
-    </dependency>
-    <dependency>
       <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
-      <version>4.2.0</version>
+      <version>5.2.4</version>
     </dependency>
     <dependency>
       <groupId>org.jooq</groupId>
       <artifactId>jooq</artifactId>
       <version>3.11.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.2.5</version>
     </dependency>
   </dependencies>
 </project>

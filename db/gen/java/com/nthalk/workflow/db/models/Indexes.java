@@ -4,7 +4,7 @@
 package com.nthalk.workflow.db.models;
 
 
-import com.nthalk.workflow.db.models.tables.SchemaVersion;
+import com.nthalk.workflow.db.models.tables.FlywaySchemaHistory;
 import com.nthalk.workflow.db.models.tables.Workflow;
 import com.nthalk.workflow.db.models.tables.WorkflowState;
 import com.nthalk.workflow.db.models.tables.WorkflowTransition;
@@ -18,7 +18,7 @@ import org.jooq.impl.Internal;
 
 
 /**
- * A class modelling indexes of tables of the <code>PUBLIC</code> schema.
+ * A class modelling indexes of tables of the <code></code> schema.
  */
 @Generated(
     value = {
@@ -34,35 +34,25 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index CONSTRAINT_INDEX_3 = Indexes0.CONSTRAINT_INDEX_3;
-    public static final Index PRIMARY_KEY_3 = Indexes0.PRIMARY_KEY_3;
-    public static final Index CONSTRAINT_INDEX_F = Indexes0.CONSTRAINT_INDEX_F;
-    public static final Index PRIMARY_KEY_F = Indexes0.PRIMARY_KEY_F;
-    public static final Index CONSTRAINT_INDEX_4 = Indexes0.CONSTRAINT_INDEX_4;
-    public static final Index CONSTRAINT_INDEX_48 = Indexes0.CONSTRAINT_INDEX_48;
-    public static final Index CONSTRAINT_INDEX_48B = Indexes0.CONSTRAINT_INDEX_48B;
-    public static final Index PRIMARY_KEY_4 = Indexes0.PRIMARY_KEY_4;
-    public static final Index CONSTRAINT_INDEX_4F = Indexes0.CONSTRAINT_INDEX_4F;
-    public static final Index PRIMARY_KEY_4F = Indexes0.PRIMARY_KEY_4F;
-    public static final Index PRIMARY_KEY_6 = Indexes0.PRIMARY_KEY_6;
-    public static final Index SCHEMA_VERSION_S_IDX = Indexes0.SCHEMA_VERSION_S_IDX;
+    public static final Index FLYWAY_SCHEMA_HISTORY_PK = Indexes0.FLYWAY_SCHEMA_HISTORY_PK;
+    public static final Index FLYWAY_SCHEMA_HISTORY_S_IDX = Indexes0.FLYWAY_SCHEMA_HISTORY_S_IDX;
+    public static final Index WORKFLOW_NAME_KEY = Indexes0.WORKFLOW_NAME_KEY;
+    public static final Index WORKFLOW_PKEY = Indexes0.WORKFLOW_PKEY;
+    public static final Index WORKFLOW_STATE_PKEY = Indexes0.WORKFLOW_STATE_PKEY;
+    public static final Index WORKFLOW_TRANSITION_PKEY = Indexes0.WORKFLOW_TRANSITION_PKEY;
+    public static final Index WORKFLOW_TRANSITION_EVENT_PKEY = Indexes0.WORKFLOW_TRANSITION_EVENT_PKEY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Indexes0 {
-        public static Index CONSTRAINT_INDEX_3 = Internal.createIndex("CONSTRAINT_INDEX_3", Workflow.WORKFLOW, new OrderField[] { Workflow.WORKFLOW.NAME }, true);
-        public static Index PRIMARY_KEY_3 = Internal.createIndex("PRIMARY_KEY_3", Workflow.WORKFLOW, new OrderField[] { Workflow.WORKFLOW.WORKFLOW_ID }, true);
-        public static Index CONSTRAINT_INDEX_F = Internal.createIndex("CONSTRAINT_INDEX_F", WorkflowState.WORKFLOW_STATE, new OrderField[] { WorkflowState.WORKFLOW_STATE.WORKFLOW_ID }, false);
-        public static Index PRIMARY_KEY_F = Internal.createIndex("PRIMARY_KEY_F", WorkflowState.WORKFLOW_STATE, new OrderField[] { WorkflowState.WORKFLOW_STATE.WORKFLOW_STATE_ID }, true);
-        public static Index CONSTRAINT_INDEX_4 = Internal.createIndex("CONSTRAINT_INDEX_4", WorkflowTransition.WORKFLOW_TRANSITION, new OrderField[] { WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_ID }, false);
-        public static Index CONSTRAINT_INDEX_48 = Internal.createIndex("CONSTRAINT_INDEX_48", WorkflowTransition.WORKFLOW_TRANSITION, new OrderField[] { WorkflowTransition.WORKFLOW_TRANSITION.FROM_WORKFLOW_STATE_ID }, false);
-        public static Index CONSTRAINT_INDEX_48B = Internal.createIndex("CONSTRAINT_INDEX_48B", WorkflowTransition.WORKFLOW_TRANSITION, new OrderField[] { WorkflowTransition.WORKFLOW_TRANSITION.TO_WORKFLOW_STATE_ID }, false);
-        public static Index PRIMARY_KEY_4 = Internal.createIndex("PRIMARY_KEY_4", WorkflowTransition.WORKFLOW_TRANSITION, new OrderField[] { WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID }, true);
-        public static Index CONSTRAINT_INDEX_4F = Internal.createIndex("CONSTRAINT_INDEX_4F", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, new OrderField[] { WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_ID }, false);
-        public static Index PRIMARY_KEY_4F = Internal.createIndex("PRIMARY_KEY_4F", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, new OrderField[] { WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID }, true);
-        public static Index PRIMARY_KEY_6 = Internal.createIndex("PRIMARY_KEY_6", SchemaVersion.SCHEMA_VERSION, new OrderField[] { SchemaVersion.SCHEMA_VERSION.INSTALLED_RANK }, true);
-        public static Index SCHEMA_VERSION_S_IDX = Internal.createIndex("schema_version_s_idx", SchemaVersion.SCHEMA_VERSION, new OrderField[] { SchemaVersion.SCHEMA_VERSION.SUCCESS }, false);
+        public static Index FLYWAY_SCHEMA_HISTORY_PK = Internal.createIndex("flyway_schema_history_pk", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, new OrderField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK }, true);
+        public static Index FLYWAY_SCHEMA_HISTORY_S_IDX = Internal.createIndex("flyway_schema_history_s_idx", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, new OrderField[] { FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.SUCCESS }, false);
+        public static Index WORKFLOW_NAME_KEY = Internal.createIndex("workflow_name_key", Workflow.WORKFLOW, new OrderField[] { Workflow.WORKFLOW.NAME }, true);
+        public static Index WORKFLOW_PKEY = Internal.createIndex("workflow_pkey", Workflow.WORKFLOW, new OrderField[] { Workflow.WORKFLOW.WORKFLOW_ID }, true);
+        public static Index WORKFLOW_STATE_PKEY = Internal.createIndex("workflow_state_pkey", WorkflowState.WORKFLOW_STATE, new OrderField[] { WorkflowState.WORKFLOW_STATE.WORKFLOW_STATE_ID }, true);
+        public static Index WORKFLOW_TRANSITION_PKEY = Internal.createIndex("workflow_transition_pkey", WorkflowTransition.WORKFLOW_TRANSITION, new OrderField[] { WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID }, true);
+        public static Index WORKFLOW_TRANSITION_EVENT_PKEY = Internal.createIndex("workflow_transition_event_pkey", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, new OrderField[] { WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID }, true);
     }
 }

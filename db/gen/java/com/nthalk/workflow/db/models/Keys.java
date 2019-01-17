@@ -4,12 +4,12 @@
 package com.nthalk.workflow.db.models;
 
 
-import com.nthalk.workflow.db.models.tables.SchemaVersion;
+import com.nthalk.workflow.db.models.tables.FlywaySchemaHistory;
 import com.nthalk.workflow.db.models.tables.Workflow;
 import com.nthalk.workflow.db.models.tables.WorkflowState;
 import com.nthalk.workflow.db.models.tables.WorkflowTransition;
 import com.nthalk.workflow.db.models.tables.WorkflowTransitionEvent;
-import com.nthalk.workflow.db.models.tables.records.SchemaVersionRecord;
+import com.nthalk.workflow.db.models.tables.records.FlywaySchemaHistoryRecord;
 import com.nthalk.workflow.db.models.tables.records.WorkflowRecord;
 import com.nthalk.workflow.db.models.tables.records.WorkflowStateRecord;
 import com.nthalk.workflow.db.models.tables.records.WorkflowTransitionEventRecord;
@@ -25,7 +25,7 @@ import org.jooq.impl.Internal;
 
 /**
  * A class modelling foreign key relationships and constraints of tables of 
- * the <code>PUBLIC</code> schema.
+ * the <code></code> schema.
  */
 @Generated(
     value = {
@@ -50,22 +50,22 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final UniqueKey<WorkflowRecord> CONSTRAINT_3 = UniqueKeys0.CONSTRAINT_3;
-    public static final UniqueKey<WorkflowRecord> CONSTRAINT_30 = UniqueKeys0.CONSTRAINT_30;
-    public static final UniqueKey<WorkflowStateRecord> CONSTRAINT_F = UniqueKeys0.CONSTRAINT_F;
-    public static final UniqueKey<WorkflowTransitionRecord> CONSTRAINT_4 = UniqueKeys0.CONSTRAINT_4;
-    public static final UniqueKey<WorkflowTransitionEventRecord> CONSTRAINT_4F = UniqueKeys0.CONSTRAINT_4F;
-    public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = UniqueKeys0.SCHEMA_VERSION_PK;
+    public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = UniqueKeys0.FLYWAY_SCHEMA_HISTORY_PK;
+    public static final UniqueKey<WorkflowRecord> WORKFLOW_PKEY = UniqueKeys0.WORKFLOW_PKEY;
+    public static final UniqueKey<WorkflowRecord> WORKFLOW_NAME_KEY = UniqueKeys0.WORKFLOW_NAME_KEY;
+    public static final UniqueKey<WorkflowStateRecord> WORKFLOW_STATE_PKEY = UniqueKeys0.WORKFLOW_STATE_PKEY;
+    public static final UniqueKey<WorkflowTransitionRecord> WORKFLOW_TRANSITION_PKEY = UniqueKeys0.WORKFLOW_TRANSITION_PKEY;
+    public static final UniqueKey<WorkflowTransitionEventRecord> WORKFLOW_TRANSITION_EVENT_PKEY = UniqueKeys0.WORKFLOW_TRANSITION_EVENT_PKEY;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<WorkflowStateRecord, WorkflowRecord> CONSTRAINT_F2 = ForeignKeys0.CONSTRAINT_F2;
-    public static final ForeignKey<WorkflowTransitionRecord, WorkflowRecord> CONSTRAINT_48 = ForeignKeys0.CONSTRAINT_48;
-    public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> CONSTRAINT_48B = ForeignKeys0.CONSTRAINT_48B;
-    public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> CONSTRAINT_48B9 = ForeignKeys0.CONSTRAINT_48B9;
-    public static final ForeignKey<WorkflowTransitionEventRecord, WorkflowTransitionRecord> CONSTRAINT_4F8 = ForeignKeys0.CONSTRAINT_4F8;
+    public static final ForeignKey<WorkflowStateRecord, WorkflowRecord> WORKFLOW_STATE__WORKFLOW_STATE_WORKFLOW_ID_FKEY = ForeignKeys0.WORKFLOW_STATE__WORKFLOW_STATE_WORKFLOW_ID_FKEY;
+    public static final ForeignKey<WorkflowTransitionRecord, WorkflowRecord> WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_WORKFLOW_ID_FKEY = ForeignKeys0.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_WORKFLOW_ID_FKEY;
+    public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_FROM_WORKFLOW_STATE_ID_FKEY = ForeignKeys0.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_FROM_WORKFLOW_STATE_ID_FKEY;
+    public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_TO_WORKFLOW_STATE_ID_FKEY = ForeignKeys0.WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_TO_WORKFLOW_STATE_ID_FKEY;
+    public static final ForeignKey<WorkflowTransitionEventRecord, WorkflowTransitionRecord> WORKFLOW_TRANSITION_EVENT__WORKFLOW_TRANSITION_EVENT_WORKFLOW_TRANSITION_ID_FKEY = ForeignKeys0.WORKFLOW_TRANSITION_EVENT__WORKFLOW_TRANSITION_EVENT_WORKFLOW_TRANSITION_ID_FKEY;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
@@ -79,19 +79,19 @@ public class Keys {
     }
 
     private static class UniqueKeys0 {
-        public static final UniqueKey<WorkflowRecord> CONSTRAINT_3 = Internal.createUniqueKey(Workflow.WORKFLOW, "CONSTRAINT_3", Workflow.WORKFLOW.WORKFLOW_ID);
-        public static final UniqueKey<WorkflowRecord> CONSTRAINT_30 = Internal.createUniqueKey(Workflow.WORKFLOW, "CONSTRAINT_30", Workflow.WORKFLOW.NAME);
-        public static final UniqueKey<WorkflowStateRecord> CONSTRAINT_F = Internal.createUniqueKey(WorkflowState.WORKFLOW_STATE, "CONSTRAINT_F", WorkflowState.WORKFLOW_STATE.WORKFLOW_STATE_ID);
-        public static final UniqueKey<WorkflowTransitionRecord> CONSTRAINT_4 = Internal.createUniqueKey(WorkflowTransition.WORKFLOW_TRANSITION, "CONSTRAINT_4", WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID);
-        public static final UniqueKey<WorkflowTransitionEventRecord> CONSTRAINT_4F = Internal.createUniqueKey(WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, "CONSTRAINT_4F", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID);
-        public static final UniqueKey<SchemaVersionRecord> SCHEMA_VERSION_PK = Internal.createUniqueKey(SchemaVersion.SCHEMA_VERSION, "schema_version_pk", SchemaVersion.SCHEMA_VERSION.INSTALLED_RANK);
+        public static final UniqueKey<FlywaySchemaHistoryRecord> FLYWAY_SCHEMA_HISTORY_PK = Internal.createUniqueKey(FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY, "flyway_schema_history_pk", FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY.INSTALLED_RANK);
+        public static final UniqueKey<WorkflowRecord> WORKFLOW_PKEY = Internal.createUniqueKey(Workflow.WORKFLOW, "workflow_pkey", Workflow.WORKFLOW.WORKFLOW_ID);
+        public static final UniqueKey<WorkflowRecord> WORKFLOW_NAME_KEY = Internal.createUniqueKey(Workflow.WORKFLOW, "workflow_name_key", Workflow.WORKFLOW.NAME);
+        public static final UniqueKey<WorkflowStateRecord> WORKFLOW_STATE_PKEY = Internal.createUniqueKey(WorkflowState.WORKFLOW_STATE, "workflow_state_pkey", WorkflowState.WORKFLOW_STATE.WORKFLOW_STATE_ID);
+        public static final UniqueKey<WorkflowTransitionRecord> WORKFLOW_TRANSITION_PKEY = Internal.createUniqueKey(WorkflowTransition.WORKFLOW_TRANSITION, "workflow_transition_pkey", WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_TRANSITION_ID);
+        public static final UniqueKey<WorkflowTransitionEventRecord> WORKFLOW_TRANSITION_EVENT_PKEY = Internal.createUniqueKey(WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, "workflow_transition_event_pkey", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_EVENT_ID);
     }
 
     private static class ForeignKeys0 {
-        public static final ForeignKey<WorkflowStateRecord, WorkflowRecord> CONSTRAINT_F2 = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.CONSTRAINT_3, WorkflowState.WORKFLOW_STATE, "CONSTRAINT_F2", WorkflowState.WORKFLOW_STATE.WORKFLOW_ID);
-        public static final ForeignKey<WorkflowTransitionRecord, WorkflowRecord> CONSTRAINT_48 = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.CONSTRAINT_3, WorkflowTransition.WORKFLOW_TRANSITION, "CONSTRAINT_48", WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_ID);
-        public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> CONSTRAINT_48B = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.CONSTRAINT_F, WorkflowTransition.WORKFLOW_TRANSITION, "CONSTRAINT_48B", WorkflowTransition.WORKFLOW_TRANSITION.FROM_WORKFLOW_STATE_ID);
-        public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> CONSTRAINT_48B9 = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.CONSTRAINT_F, WorkflowTransition.WORKFLOW_TRANSITION, "CONSTRAINT_48B9", WorkflowTransition.WORKFLOW_TRANSITION.TO_WORKFLOW_STATE_ID);
-        public static final ForeignKey<WorkflowTransitionEventRecord, WorkflowTransitionRecord> CONSTRAINT_4F8 = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.CONSTRAINT_4, WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, "CONSTRAINT_4F8", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_ID);
+        public static final ForeignKey<WorkflowStateRecord, WorkflowRecord> WORKFLOW_STATE__WORKFLOW_STATE_WORKFLOW_ID_FKEY = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.WORKFLOW_PKEY, WorkflowState.WORKFLOW_STATE, "workflow_state__workflow_state_workflow_id_fkey", WorkflowState.WORKFLOW_STATE.WORKFLOW_ID);
+        public static final ForeignKey<WorkflowTransitionRecord, WorkflowRecord> WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_WORKFLOW_ID_FKEY = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.WORKFLOW_PKEY, WorkflowTransition.WORKFLOW_TRANSITION, "workflow_transition__workflow_transition_workflow_id_fkey", WorkflowTransition.WORKFLOW_TRANSITION.WORKFLOW_ID);
+        public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_FROM_WORKFLOW_STATE_ID_FKEY = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.WORKFLOW_STATE_PKEY, WorkflowTransition.WORKFLOW_TRANSITION, "workflow_transition__workflow_transition_from_workflow_state_id_fkey", WorkflowTransition.WORKFLOW_TRANSITION.FROM_WORKFLOW_STATE_ID);
+        public static final ForeignKey<WorkflowTransitionRecord, WorkflowStateRecord> WORKFLOW_TRANSITION__WORKFLOW_TRANSITION_TO_WORKFLOW_STATE_ID_FKEY = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.WORKFLOW_STATE_PKEY, WorkflowTransition.WORKFLOW_TRANSITION, "workflow_transition__workflow_transition_to_workflow_state_id_fkey", WorkflowTransition.WORKFLOW_TRANSITION.TO_WORKFLOW_STATE_ID);
+        public static final ForeignKey<WorkflowTransitionEventRecord, WorkflowTransitionRecord> WORKFLOW_TRANSITION_EVENT__WORKFLOW_TRANSITION_EVENT_WORKFLOW_TRANSITION_ID_FKEY = Internal.createForeignKey(com.nthalk.workflow.db.models.Keys.WORKFLOW_TRANSITION_PKEY, WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT, "workflow_transition_event__workflow_transition_event_workflow_transition_id_fkey", WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT.WORKFLOW_TRANSITION_ID);
     }
 }

@@ -4,9 +4,9 @@
 package com.nthalk.workflow.db.models.tables;
 
 
+import com.nthalk.workflow.db.models.DefaultSchema;
 import com.nthalk.workflow.db.models.Indexes;
 import com.nthalk.workflow.db.models.Keys;
-import com.nthalk.workflow.db.models.Public;
 import com.nthalk.workflow.db.models.tables.records.WorkflowRecord;
 
 import java.util.Arrays;
@@ -41,10 +41,10 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Workflow extends TableImpl<WorkflowRecord> {
 
-    private static final long serialVersionUID = 280841821;
+    private static final long serialVersionUID = -1097184758;
 
     /**
-     * The reference instance of <code>PUBLIC.WORKFLOW</code>
+     * The reference instance of <code>workflow</code>
      */
     public static final Workflow WORKFLOW = new Workflow();
 
@@ -57,46 +57,46 @@ public class Workflow extends TableImpl<WorkflowRecord> {
     }
 
     /**
-     * The column <code>PUBLIC.WORKFLOW.WORKFLOW_ID</code>.
+     * The column <code>workflow.workflow_id</code>.
      */
-    public final TableField<WorkflowRecord, Integer> WORKFLOW_ID = createField("WORKFLOW_ID", org.jooq.impl.SQLDataType.INTEGER.nullable(false).identity(true), this, "");
+    public final TableField<WorkflowRecord, Integer> WORKFLOW_ID = createField("workflow_id", org.jooq.impl.SQLDataType.INTEGER.nullable(false).defaultValue(org.jooq.impl.DSL.field("nextval('workflow_workflow_id_seq'::regclass)", org.jooq.impl.SQLDataType.INTEGER)), this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW.NAME</code>.
+     * The column <code>workflow.name</code>.
      */
-    public final TableField<WorkflowRecord, String> NAME = createField("NAME", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW.INSTANCE_TABLE</code>.
+     * The column <code>workflow.instance_table</code>.
      */
-    public final TableField<WorkflowRecord, String> INSTANCE_TABLE = createField("INSTANCE_TABLE", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowRecord, String> INSTANCE_TABLE = createField("instance_table", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW.INSTANCE_STATE_FIELD</code>.
+     * The column <code>workflow.instance_state_field</code>.
      */
-    public final TableField<WorkflowRecord, String> INSTANCE_STATE_FIELD = createField("INSTANCE_STATE_FIELD", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowRecord, String> INSTANCE_STATE_FIELD = createField("instance_state_field", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * The column <code>PUBLIC.WORKFLOW.INSTANCE_KEY_FIELD</code>.
+     * The column <code>workflow.instance_key_field</code>.
      */
-    public final TableField<WorkflowRecord, String> INSTANCE_KEY_FIELD = createField("INSTANCE_KEY_FIELD", org.jooq.impl.SQLDataType.VARCHAR(2147483647), this, "");
+    public final TableField<WorkflowRecord, String> INSTANCE_KEY_FIELD = createField("instance_key_field", org.jooq.impl.SQLDataType.VARCHAR, this, "");
 
     /**
-     * Create a <code>PUBLIC.WORKFLOW</code> table reference
+     * Create a <code>workflow</code> table reference
      */
     public Workflow() {
-        this(DSL.name("WORKFLOW"), null);
+        this(DSL.name("workflow"), null);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW</code> table reference
+     * Create an aliased <code>workflow</code> table reference
      */
     public Workflow(String alias) {
         this(DSL.name(alias), WORKFLOW);
     }
 
     /**
-     * Create an aliased <code>PUBLIC.WORKFLOW</code> table reference
+     * Create an aliased <code>workflow</code> table reference
      */
     public Workflow(Name alias) {
         this(alias, WORKFLOW);
@@ -119,7 +119,7 @@ public class Workflow extends TableImpl<WorkflowRecord> {
      */
     @Override
     public Schema getSchema() {
-        return Public.PUBLIC;
+        return DefaultSchema.DEFAULT_SCHEMA;
     }
 
     /**
@@ -127,7 +127,7 @@ public class Workflow extends TableImpl<WorkflowRecord> {
      */
     @Override
     public List<Index> getIndexes() {
-        return Arrays.<Index>asList(Indexes.CONSTRAINT_INDEX_3, Indexes.PRIMARY_KEY_3);
+        return Arrays.<Index>asList(Indexes.WORKFLOW_NAME_KEY, Indexes.WORKFLOW_PKEY);
     }
 
     /**
@@ -143,7 +143,7 @@ public class Workflow extends TableImpl<WorkflowRecord> {
      */
     @Override
     public UniqueKey<WorkflowRecord> getPrimaryKey() {
-        return Keys.CONSTRAINT_3;
+        return Keys.WORKFLOW_PKEY;
     }
 
     /**
@@ -151,7 +151,7 @@ public class Workflow extends TableImpl<WorkflowRecord> {
      */
     @Override
     public List<UniqueKey<WorkflowRecord>> getKeys() {
-        return Arrays.<UniqueKey<WorkflowRecord>>asList(Keys.CONSTRAINT_3, Keys.CONSTRAINT_30);
+        return Arrays.<UniqueKey<WorkflowRecord>>asList(Keys.WORKFLOW_PKEY, Keys.WORKFLOW_NAME_KEY);
     }
 
     /**

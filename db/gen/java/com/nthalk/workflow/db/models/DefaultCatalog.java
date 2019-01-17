@@ -27,7 +27,7 @@ import org.jooq.impl.CatalogImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultCatalog extends CatalogImpl {
 
-    private static final long serialVersionUID = 462102799;
+    private static final long serialVersionUID = 848435563;
 
     /**
      * The reference instance of <code></code>
@@ -35,9 +35,9 @@ public class DefaultCatalog extends CatalogImpl {
     public static final DefaultCatalog DEFAULT_CATALOG = new DefaultCatalog();
 
     /**
-     * The schema <code>PUBLIC</code>.
+     * The schema <code></code>.
      */
-    public final Public PUBLIC = com.nthalk.workflow.db.models.Public.PUBLIC;
+    public final DefaultSchema DEFAULT_SCHEMA = com.nthalk.workflow.db.models.DefaultSchema.DEFAULT_SCHEMA;
 
     /**
      * No further instances allowed
@@ -55,6 +55,6 @@ public class DefaultCatalog extends CatalogImpl {
 
     private final List<Schema> getSchemas0() {
         return Arrays.<Schema>asList(
-            Public.PUBLIC);
+            DefaultSchema.DEFAULT_SCHEMA);
     }
 }

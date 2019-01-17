@@ -4,7 +4,7 @@
 package com.nthalk.workflow.db.models;
 
 
-import com.nthalk.workflow.db.models.tables.SchemaVersion;
+import com.nthalk.workflow.db.models.tables.FlywaySchemaHistory;
 import com.nthalk.workflow.db.models.tables.Workflow;
 import com.nthalk.workflow.db.models.tables.WorkflowState;
 import com.nthalk.workflow.db.models.tables.WorkflowTransition;
@@ -14,7 +14,7 @@ import javax.annotation.Generated;
 
 
 /**
- * Convenience access to all tables in PUBLIC
+ * Convenience access to all tables in 
  */
 @Generated(
     value = {
@@ -27,27 +27,27 @@ import javax.annotation.Generated;
 public class Tables {
 
     /**
-     * The table <code>PUBLIC.WORKFLOW</code>.
+     * The table <code>flyway_schema_history</code>.
+     */
+    public static final FlywaySchemaHistory FLYWAY_SCHEMA_HISTORY = com.nthalk.workflow.db.models.tables.FlywaySchemaHistory.FLYWAY_SCHEMA_HISTORY;
+
+    /**
+     * The table <code>workflow</code>.
      */
     public static final Workflow WORKFLOW = com.nthalk.workflow.db.models.tables.Workflow.WORKFLOW;
 
     /**
-     * The table <code>PUBLIC.WORKFLOW_STATE</code>.
+     * The table <code>workflow_state</code>.
      */
     public static final WorkflowState WORKFLOW_STATE = com.nthalk.workflow.db.models.tables.WorkflowState.WORKFLOW_STATE;
 
     /**
-     * The table <code>PUBLIC.WORKFLOW_TRANSITION</code>.
+     * The table <code>workflow_transition</code>.
      */
     public static final WorkflowTransition WORKFLOW_TRANSITION = com.nthalk.workflow.db.models.tables.WorkflowTransition.WORKFLOW_TRANSITION;
 
     /**
-     * The table <code>PUBLIC.WORKFLOW_TRANSITION_EVENT</code>.
+     * The table <code>workflow_transition_event</code>.
      */
     public static final WorkflowTransitionEvent WORKFLOW_TRANSITION_EVENT = com.nthalk.workflow.db.models.tables.WorkflowTransitionEvent.WORKFLOW_TRANSITION_EVENT;
-
-    /**
-     * The table <code>PUBLIC.schema_version</code>.
-     */
-    public static final SchemaVersion SCHEMA_VERSION = com.nthalk.workflow.db.models.tables.SchemaVersion.SCHEMA_VERSION;
 }

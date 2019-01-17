@@ -28,73 +28,73 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class WorkflowRecord extends UpdatableRecordImpl<WorkflowRecord> implements Record5<Integer, String, String, String, String> {
 
-    private static final long serialVersionUID = -2020121941;
+    private static final long serialVersionUID = 552489561;
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW.WORKFLOW_ID</code>.
+     * Setter for <code>workflow.workflow_id</code>.
      */
     public void setWorkflowId(Integer value) {
         set(0, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW.WORKFLOW_ID</code>.
+     * Getter for <code>workflow.workflow_id</code>.
      */
     public Integer getWorkflowId() {
         return (Integer) get(0);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW.NAME</code>.
+     * Setter for <code>workflow.name</code>.
      */
     public void setName(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW.NAME</code>.
+     * Getter for <code>workflow.name</code>.
      */
     public String getName() {
         return (String) get(1);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW.INSTANCE_TABLE</code>.
+     * Setter for <code>workflow.instance_table</code>.
      */
     public void setInstanceTable(String value) {
         set(2, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW.INSTANCE_TABLE</code>.
+     * Getter for <code>workflow.instance_table</code>.
      */
     public String getInstanceTable() {
         return (String) get(2);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW.INSTANCE_STATE_FIELD</code>.
+     * Setter for <code>workflow.instance_state_field</code>.
      */
     public void setInstanceStateField(String value) {
         set(3, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW.INSTANCE_STATE_FIELD</code>.
+     * Getter for <code>workflow.instance_state_field</code>.
      */
     public String getInstanceStateField() {
         return (String) get(3);
     }
 
     /**
-     * Setter for <code>PUBLIC.WORKFLOW.INSTANCE_KEY_FIELD</code>.
+     * Setter for <code>workflow.instance_key_field</code>.
      */
     public void setInstanceKeyField(String value) {
         set(4, value);
     }
 
     /**
-     * Getter for <code>PUBLIC.WORKFLOW.INSTANCE_KEY_FIELD</code>.
+     * Getter for <code>workflow.instance_key_field</code>.
      */
     public String getInstanceKeyField() {
         return (String) get(4);
