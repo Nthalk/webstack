@@ -35,8 +35,10 @@ system. The recommendation is RabbitMQ with the STOMP 1.2 plugin.
 - [ ] websocket example (use rabbitmq / stomp)
 - [ ] queueing example (use rabbitmq / annotations)
 - [ ] messaging example (use rabbitmq / annotations)
-- [ ] a react-native project (android)
-- [ ] a react-native project (ios)
+- [ ] XSD based configuration
+- [ ] Authentication
+- [x] a react-native project (android)
+- [x] a react-native project (ios)
 - [x] vagrant w/ rabbitmq & postgres
 - [x] home directory
 - [x] messaging / queues (use rabbit)
