@@ -37,6 +37,7 @@ system. The recommendation is RabbitMQ with the STOMP 1.2 plugin.
 - [ ] messaging example (use rabbitmq / annotations)
 - [ ] XSD based configuration
 - [ ] Authentication
+- [x] add react ui lib https://material-ui.com/
 - [x] a react-native project (android)
 - [x] a react-native project (ios)
 - [x] vagrant w/ rabbitmq & postgres

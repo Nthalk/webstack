@@ -6,7 +6,7 @@
 
   <parent>
     <groupId>com.nthalk</groupId>
-    <artifactId>workflow</artifactId>
+    <artifactId>webstack</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
@@ -49,7 +49,7 @@
               <pojos>true</pojos>
             </generate>
             <target>
-              <packageName>com.nthalk.workflow.db.models</packageName>
+              <packageName>com.nthalk.webstack.db.models</packageName>
               <directory>${project.basedir}/gen/java</directory>
             </target>
           </generator>

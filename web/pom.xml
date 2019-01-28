@@ -6,7 +6,7 @@
 
   <parent>
     <groupId>com.nthalk</groupId>
-    <artifactId>workflow</artifactId>
+    <artifactId>webstack</artifactId>
     <version>1.0.0-SNAPSHOT</version>
   </parent>
 
