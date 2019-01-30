@@ -30,18 +30,24 @@ During development, client websockets connect to the local spring memory broker 
 In production, client websockets connect to a local spring relay that then relays to a STOMP enabled
 system. The recommendation is RabbitMQ with the STOMP 1.2 plugin. 
 
-## Tasks:
+## Todo:
 
 - [ ] websocket example (use rabbitmq / stomp)
 - [ ] queueing example (use rabbitmq / annotations)
 - [ ] messaging example (use rabbitmq / annotations)
 - [ ] XSD based configuration objects
-- [ ] Send emails
-- [ ] Send SMS
+- [ ] Send emails (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/quick-start.html)
+- [ ] Send SMS (https://docs.aws.amazon.com/sns/latest/dg/sns-mobile-phone-number-as-subscriber.html)
+- [ ] Maps (https://github.com/react-native-community/react-native-maps via openstreetmap)
+- [ ] PWA for webap
+
+## Done:
+
 - [x] Authentication
 - [x] Oauth google email principal login
 - [x] Oauth facebook email principal login
 - [x] add react ui lib https://material-ui.com/
+- [x] share web service models with typescript 
 - [x] a react-native project (android)
 - [x] a react-native project (ios)
 - [x] vagrant w/ rabbitmq & postgres
