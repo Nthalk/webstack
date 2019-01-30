@@ -12,7 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 
 @SpringBootApplication(
     exclude = {ErrorMvcAutoConfiguration.class},
-    scanBasePackages = "com.nthalk.workflow.web")
+    scanBasePackages = "com.nthalk.webstack.web")
 @EnableConfigurationProperties(AppConfig.class)
 public class WebCli {
 
@@ -31,7 +31,10 @@ public class WebCli {
     String home = System.getProperty("home", "./home");
     System.setProperty(
         "spring.config.location",
-        "classpath:application.properties,file:" + home + "/application.properties");
+        ""
+            + ("classpath:application.properties,")
+            + ("file:" + home + "/application.properties,")
+            + ("file:" + home + "/secret.properties"));
 
     SpringApplication.run(WebCli.class, args);
   }

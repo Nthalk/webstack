@@ -35,8 +35,12 @@ system. The recommendation is RabbitMQ with the STOMP 1.2 plugin.
 - [ ] websocket example (use rabbitmq / stomp)
 - [ ] queueing example (use rabbitmq / annotations)
 - [ ] messaging example (use rabbitmq / annotations)
-- [ ] XSD based configuration
-- [ ] Authentication
+- [ ] XSD based configuration objects
+- [ ] Send emails
+- [ ] Send SMS
+- [x] Authentication
+- [x] Oauth google email principal login
+- [x] Oauth facebook email principal login
 - [x] add react ui lib https://material-ui.com/
 - [x] a react-native project (android)
 - [x] a react-native project (ios)
