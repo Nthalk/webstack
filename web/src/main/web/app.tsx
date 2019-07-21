@@ -1,38 +1,38 @@
-import * as React from "react"
-import {observer} from "mobx-react";
-import {observable} from "mobx";
+import React from "react"
 import {Workflow} from "../../../gen/typescript/api";
-import api from "./lib/api";
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import produce from 'immer';
+import {ApiService} from "./lib/api";
 
 
-@observer
-export class App extends React.Component {
+type AppState = {
+  edit: Workflow
+};
 
-  @observable
-  edit: Workflow = {
-    name: ""
+export class App extends React.Component<{ api: ApiService }, AppState> {
+  update = (s: (AppState) => void) => this.setState(produce(this.state, s));
+
+  state = {
+    edit: {name: "asdf"}
   };
 
-  async save(event) {
+  save = async (event) => {
     event.preventDefault();
-    let response = await api.post("workflows", this.edit);
-  }
+    return await this.props.api.post("workflows", this.state.edit);
+  };
+
+  updateWorkflowName = (event) => {
+    this.update(s => {
+      s.edit.name = event.target.value
+    })
+  };
 
   render() {
-    return <div>
-      <CssBaseline/>
-      <form onSubmit={this.save.bind(this)}>
-
-        <label>Name:</label>
-        <input type="text"
-               value={this.edit.name}
-               onChange={e => this.edit.name = e.target.value}/>
-        <Button variant="contained" color="primary">
-          Hello World
-        </Button>
-      </form>
-    </div>
+    return <form onSubmit={this.save}>
+      <label>Name: </label>
+      <input type="text"
+             value={this.state.edit.name}
+             onChange={this.updateWorkflowName}/>
+      <button>Submit</button>
+    </form>
   }
 }

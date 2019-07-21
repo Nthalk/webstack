@@ -1,27 +1,16 @@
-import * as ReactDOM from "react-dom"
-import * as React from "react"
-import {App} from "./app";
+import ReactDOM from 'react-dom';
+import React from 'react';
 
-import SockJS from "sockjs-client";
-import Stomp from "stompjs"
-
-
-var websocket = SockJS("/ws");
-var stomp = Stomp.over(websocket);
-
-(window as any).stomp = stomp;
-
-stomp.connect({}, () => {
-  stomp.subscribe("/topic/ws-test", () => {
-    debugger
-  });
-  stomp.send("/app/ws-test/message", {}, "message");
-});
-
-let root = document.getElementById('main');
-if (root != null) {
+async function bootstrap() {
+  const app = await import("./app");
+  const api = await import("./lib/api");
   ReactDOM.render(
-      <App/>,
-      root,
-  );
+      <api.Api>
+        <api.ApiContext.Consumer>
+          {api => <app.App api={api}/>}
+        </api.ApiContext.Consumer>
+      </api.Api>,
+      document.getElementById('main'));
 }
+
+bootstrap();

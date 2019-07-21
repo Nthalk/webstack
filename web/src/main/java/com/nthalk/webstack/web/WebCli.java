@@ -3,6 +3,7 @@ package com.nthalk.webstack.web;
 import com.nthalk.webstack.web.config.AppConfig;
 import java.io.IOException;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Properties;
 import org.docopt.Docopt;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +18,10 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 public class WebCli {
 
   public static void main(String[] args) throws IOException {
-    Docopt docopt = new Docopt(WebCli.class.getClassLoader().getResourceAsStream("WebCli.docopt"));
+    Docopt docopt =
+        new Docopt(
+            Objects.requireNonNull(
+                WebCli.class.getClassLoader().getResourceAsStream("WebCli.docopt")));
     docopt.withHelp(true);
 
     Properties build = new Properties();
