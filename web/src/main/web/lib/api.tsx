@@ -1,13 +1,13 @@
 import produce from "immer"
 import React from "react";
 
-export interface ApiState {
-  activeRequests: Array<Promise<Response>>,
-  defaultUrl: string
-}
-
 export interface ApiService {
   post: (url: string, data: any) => Promise<Response>
+}
+
+export interface ApiState extends ApiService {
+  activeRequests: Array<Promise<Response>>,
+  defaultUrl: string
 }
 
 export const ApiContext = React.createContext<ApiService>(null);
@@ -39,7 +39,7 @@ export class Api extends React.Component<{}, ApiState> {
   }
 
   state = {
-    post: this.post.bind(this).bind(this),
+    post: this.post.bind(this),
     activeRequests: [],
     defaultUrl: location.protocol + '//' +
         location.hostname +

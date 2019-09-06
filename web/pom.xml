@@ -46,7 +46,7 @@
       <plugin>
         <groupId>cz.habarta.typescript-generator</groupId>
         <artifactId>typescript-generator-maven-plugin</artifactId>
-        <version>2.14.505</version>
+        <version>2.16.538</version>
         <executions>
           <execution>
             <id>generate</id>
@@ -93,16 +93,17 @@
       <plugin>
         <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.7.6</version>
+        <version>1.8.0</version>
         <configuration>
-          <nodeVersion>v11.6.0</nodeVersion>
-          <npmVersion>6.5.0</npmVersion>
+          <nodeVersion>v12.9.0</nodeVersion>
+          <npmVersion>6.10.3</npmVersion>
         </configuration>
         <executions>
           <execution>
             <id>install node and npm</id>
             <goals>
-              <goal>install-node-and-npm</goal>
+              <goal>install-node-and-npm
+              </goal>
             </goals>
             <phase>generate-resources</phase>
           </execution>
@@ -145,7 +146,7 @@
     <dependency>
       <groupId>com.iodesystems</groupId>
       <artifactId>fn</artifactId>
-      <version>2.1.8</version>
+      <version>${fn.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>

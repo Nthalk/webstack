@@ -6,6 +6,7 @@ import java.util.Properties;
 import javax.sql.DataSource;
 import org.docopt.Docopt;
 import org.flywaydb.core.Flyway;
+import org.flywaydb.core.api.configuration.FluentConfiguration;
 
 public class DbCli {
 
@@ -27,21 +28,23 @@ public class DbCli {
   }
 
   public static void migrate(String jdbcurl, String user, String password) {
-    Flyway flyway = new Flyway();
-    flyway.setDataSource(jdbcurl, user, password);
+    Flyway flyway =
+        new Flyway(
+            new FluentConfiguration()
+                .dataSource(jdbcurl, user, password)
+                .locations("classpath:/db"));
     migrate(flyway);
   }
 
   public static void migrate(DataSource dataSource) {
-    Flyway flyway = new Flyway();
-    flyway.setDataSource(dataSource);
+    Flyway flyway =
+        new Flyway(new FluentConfiguration().dataSource(dataSource).locations("classpath:/db"));
     migrate(flyway);
   }
 
   private static void migrate(Flyway flyway) {
     System.out.print("Migrating database... ");
-    flyway.setLocations("classpath:/db");
-    System.out.println("Migrated.");
     flyway.migrate();
+    System.out.println("Migrated.");
   }
 }

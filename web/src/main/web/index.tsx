@@ -6,9 +6,9 @@ async function bootstrap() {
   const api = await import("./lib/api");
   ReactDOM.render(
       <api.Api>
-        <api.ApiContext.Consumer>
+        <api.ApiStateContext.Consumer>
           {api => <app.App api={api}/>}
-        </api.ApiContext.Consumer>
+        </api.ApiStateContext.Consumer>
       </api.Api>,
       document.getElementById('main'));
 }

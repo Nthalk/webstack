@@ -19,11 +19,13 @@
   </modules>
 
   <properties>
-    <jooq.version>3.11.11</jooq.version>
+    <jooq.version>3.12.1</jooq.version>
     <hikari-cp.version>3.3.1</hikari-cp.version>
+    <flyway.version>6.0.1</flyway.version>
+    <fn.version>3.0.2</fn.version>
     <postgres.version>42.2.6.jre7</postgres.version>
-    <spring-boot.version>2.1.6.RELEASE</spring-boot.version>
-    <spring-security.version>5.1.5.RELEASE</spring-security.version>
+    <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
+    <spring-security.version>5.1.6.RELEASE</spring-security.version>
   </properties>
 
   <build>
@@ -33,13 +35,13 @@
         <version>3.8.1</version>
         <inherited>true</inherited>
         <configuration>
-          <target>1.8</target>
-          <source>1.8</source>
+          <source>11</source>
+          <target>11</target>
         </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-source-plugin</artifactId>
-        <version>3.0.1</version>
+        <version>3.1.0</version>
         <inherited>true</inherited>
         <configuration>
           <attach>true</attach>
@@ -67,7 +69,7 @@
         </plugin>
         <plugin>
           <artifactId>maven-site-plugin</artifactId>
-          <version>3.7.1</version>
+          <version>3.8.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
@@ -75,11 +77,11 @@
         </plugin>
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
-          <version>3.2.2</version>
+          <version>3.2.3</version>
         </plugin>
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
-          <version>3.1.1</version>
+          <version>3.1.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
