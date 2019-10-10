@@ -46,7 +46,7 @@
       <plugin>
         <groupId>cz.habarta.typescript-generator</groupId>
         <artifactId>typescript-generator-maven-plugin</artifactId>
-        <version>2.16.538</version>
+        <version>2.17.558</version>
         <executions>
           <execution>
             <id>generate</id>
@@ -59,8 +59,10 @@
         <configuration>
           <jsonLibrary>jackson2</jsonLibrary>
           <classPatterns>
-            <classPattern>com.nthalk.workflow.web.controllers.models.**</classPattern>
+            <classPattern>com.nthalk.webstack.web.api.**</classPattern>
           </classPatterns>
+          <scanSpringApplication>true</scanSpringApplication>
+          <generateSpringApplicationClient>true</generateSpringApplicationClient>
           <customTypeNamingFunction><![CDATA[
             function(name, simpleName) {
               if (name.contains(".pojos.")) return simpleName + "Pojo";
@@ -68,9 +70,17 @@
           ]]></customTypeNamingFunction>
           <noFileComment>true</noFileComment>
           <outputKind>module</outputKind>
-          <outputFile>${project.basedir}/gen/typescript/api.d.ts</outputFile>
+          <outputFileType>implementationFile</outputFileType>
+          <outputFile>${project.basedir}/src/main/web/gen/api.ts</outputFile>
           <optionalProperties>all</optionalProperties>
         </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>cz.habarta.typescript-generator</groupId>
+            <artifactId>typescript-generator-spring</artifactId>
+            <version>2.17.558</version>
+          </dependency>
+        </dependencies>
       </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
@@ -84,7 +94,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.basedir}/gen/typescript</source>
+                <source>${project.basedir}/src/main/web/gen</source>
               </sources>
             </configuration>
           </execution>
@@ -95,8 +105,8 @@
         <artifactId>frontend-maven-plugin</artifactId>
         <version>1.8.0</version>
         <configuration>
-          <nodeVersion>v12.9.0</nodeVersion>
-          <npmVersion>6.10.3</npmVersion>
+          <nodeVersion>v12.10.0</nodeVersion>
+          <npmVersion>6.11.3</npmVersion>
         </configuration>
         <executions>
           <execution>
@@ -133,6 +143,11 @@
   </build>
 
   <dependencies>
+    <dependency>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>2.9.10</version>
+    </dependency>
     <dependency>
       <groupId>${project.groupId}</groupId>
       <artifactId>db</artifactId>

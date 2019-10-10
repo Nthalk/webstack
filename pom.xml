@@ -20,12 +20,12 @@
 
   <properties>
     <jooq.version>3.12.1</jooq.version>
-    <hikari-cp.version>3.3.1</hikari-cp.version>
-    <flyway.version>6.0.1</flyway.version>
+    <hikari-cp.version>3.4.1</hikari-cp.version>
+    <flyway.version>6.0.6</flyway.version>
     <fn.version>3.0.2</fn.version>
-    <postgres.version>42.2.6.jre7</postgres.version>
-    <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
-    <spring-security.version>5.1.6.RELEASE</spring-security.version>
+    <postgres.version>42.2.8.jre7</postgres.version>
+    <spring-boot.version>2.1.9.RELEASE</spring-boot.version>
+    <spring-security.version>5.2.0.RELEASE</spring-security.version>
   </properties>
 
   <build>
@@ -35,8 +35,8 @@
         <version>3.8.1</version>
         <inherited>true</inherited>
         <configuration>
-          <source>11</source>
-          <target>11</target>
+          <source>8</source>
+          <target>8</target>
         </configuration>
       </plugin>
       <plugin>

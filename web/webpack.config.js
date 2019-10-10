@@ -6,12 +6,12 @@ module.exports = (env, argv) => {
     mode: argv.mode,
     devtool: 'source-map',
     entry: {
-      main: './src/main/web/index.tsx'
+      main: path.resolve(__dirname, 'src/main/web/index.tsx')
     },
     output: {
       path: path.resolve(__dirname, "target/classes/web"),
-      filename: '[name].[contenthash].js',
-      chunkFilename: '[name].[contenthash].chunk.js'
+      filename: 'static/[name].[contenthash].js',
+      chunkFilename: 'static/[name].[contenthash].chunk.js'
     },
     module: {
       rules: [
@@ -24,8 +24,6 @@ module.exports = (env, argv) => {
           test: /\.tsx?$/,
           use: [{
             loader: 'babel-loader'
-          }, {
-            loader: 'ts-loader'
           }],
           exclude: /node_modules/
         },
@@ -66,7 +64,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: 'src/main/web/index.html'
+        template: path.resolve(__dirname, 'src/main/web/index.html')
       })
     ]
   }
