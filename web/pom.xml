@@ -1,226 +1,291 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <groupId>com.nthalk</groupId>
-    <artifactId>webstack</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-
   <artifactId>web</artifactId>
-  <packaging>war</packaging>
 
-  <properties>
-    <failOnMissingWebXml>false</failOnMissingWebXml>
-  </properties>
-
-  <profiles>
-    <profile>
-      <id>war</id>
-      <dependencies>
-        <dependency>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-starter-tomcat</artifactId>
-          <version>${spring-boot.version}</version>
-          <scope>provided</scope>
-        </dependency>
-      </dependencies>
-    </profile>
-  </profiles>
   <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-        <filtering>true</filtering>
-      </resource>
-    </resources>
     <plugins>
       <plugin>
-        <groupId>org.springframework.boot</groupId>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <configuration>
+          <compilerPlugins>
+            <plugin>all-open</plugin>
+            <plugin>spring</plugin>
+          </compilerPlugins>
+          <jvmTarget>1.8</jvmTarget>
+          <pluginOptions>
+            <option>all-open:annotation=com.nthalk.webstack.web.annotations.Open</option>
+          </pluginOptions>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>kotlin-maven-allopen</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <version>${kotlin.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <id>compile</id>
+            <phase>compile</phase>
+          </execution>
+          <execution>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+          </execution>
+        </executions>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <version>${kotlin.version}</version>
+      </plugin>
+      <plugin>
         <artifactId>spring-boot-maven-plugin</artifactId>
+        <groupId>org.springframework.boot</groupId>
         <version>${spring-boot.version}</version>
       </plugin>
       <plugin>
-        <groupId>cz.habarta.typescript-generator</groupId>
         <artifactId>typescript-generator-maven-plugin</artifactId>
-        <version>2.17.558</version>
-        <executions>
-          <execution>
-            <id>generate</id>
-            <goals>
-              <goal>generate</goal>
-            </goals>
-            <phase>process-classes</phase>
-          </execution>
-        </executions>
         <configuration>
-          <jsonLibrary>jackson2</jsonLibrary>
           <classPatterns>
             <classPattern>com.nthalk.webstack.web.api.**</classPattern>
           </classPatterns>
-          <scanSpringApplication>true</scanSpringApplication>
-          <generateSpringApplicationClient>true</generateSpringApplicationClient>
           <customTypeNamingFunction><![CDATA[
             function(name, simpleName) {
               if (name.contains(".pojos.")) return simpleName + "Pojo";
             }
           ]]></customTypeNamingFunction>
+          <generateSpringApplicationClient>true</generateSpringApplicationClient>
+          <jsonLibrary>jackson2</jsonLibrary>
           <noFileComment>true</noFileComment>
-          <outputKind>module</outputKind>
-          <outputFileType>implementationFile</outputFileType>
+          <optionalAnnotations>
+            <annotation>com.nthalk.webstack.web.annotations.Optional</annotation>
+          </optionalAnnotations>
           <outputFile>${project.basedir}/src/main/web/gen/api.ts</outputFile>
-          <optionalProperties>all</optionalProperties>
+          <outputFileType>implementationFile</outputFileType>
+          <outputKind>module</outputKind>
+          <restNamespacing>perResource</restNamespacing>
+          <scanSpringApplication>true</scanSpringApplication>
         </configuration>
         <dependencies>
           <dependency>
-            <groupId>cz.habarta.typescript-generator</groupId>
             <artifactId>typescript-generator-spring</artifactId>
-            <version>2.17.558</version>
+            <groupId>cz.habarta.typescript-generator</groupId>
+            <version>2.18.565</version>
           </dependency>
         </dependencies>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
         <executions>
           <execution>
-            <phase>generate-sources</phase>
             <goals>
-              <goal>add-source</goal>
+              <goal>generate</goal>
             </goals>
+            <id>generate</id>
+            <phase>process-classes</phase>
+          </execution>
+        </executions>
+        <groupId>cz.habarta.typescript-generator</groupId>
+        <version>2.18.565</version>
+      </plugin>
+      <plugin>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
             <configuration>
               <sources>
                 <source>${project.basedir}/src/main/web/gen</source>
               </sources>
             </configuration>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <phase>generate-sources</phase>
           </execution>
         </executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>3.0.0</version>
       </plugin>
       <plugin>
-        <groupId>com.github.eirslett</groupId>
         <artifactId>frontend-maven-plugin</artifactId>
-        <version>1.8.0</version>
         <configuration>
           <nodeVersion>v12.10.0</nodeVersion>
           <npmVersion>6.11.3</npmVersion>
         </configuration>
         <executions>
           <execution>
-            <id>install node and npm</id>
             <goals>
               <goal>install-node-and-npm
               </goal>
             </goals>
+            <id>install node and npm</id>
             <phase>generate-resources</phase>
           </execution>
           <execution>
-            <id>npm install</id>
-            <goals>
-              <goal>npm</goal>
-            </goals>
-            <phase>compile</phase>
             <configuration>
               <arguments>install</arguments>
             </configuration>
-          </execution>
-          <execution>
-            <id>npm build</id>
             <goals>
               <goal>npm</goal>
             </goals>
+            <id>npm install</id>
             <phase>compile</phase>
+          </execution>
+          <execution>
             <configuration>
               <arguments>run-script build</arguments>
             </configuration>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <id>npm build</id>
+            <phase>${NPM_BUILD_PHASE}</phase>
           </execution>
         </executions>
+        <groupId>com.github.eirslett</groupId>
+        <version>1.8.0</version>
       </plugin>
     </plugins>
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
   </build>
 
   <dependencies>
     <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.9.10</version>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <version>${kotlin.version}</version>
     </dependency>
     <dependency>
-      <groupId>${project.groupId}</groupId>
+      <artifactId>kotlin-reflect</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <version>${kotlin.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>kotlin-test</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <scope>test</scope>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>jackson-module-kotlin</artifactId>
+      <groupId>com.fasterxml.jackson.module</groupId>
+      <version>${jackson.version}</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>jackson-databind</artifactId>
+      <groupId>com.fasterxml.jackson.core</groupId>
+      <version>${jackson.version}</version>
+    </dependency>
+    <dependency>
       <artifactId>db</artifactId>
+      <groupId>${project.groupId}</groupId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.offbytwo</groupId>
       <artifactId>docopt</artifactId>
+      <groupId>com.offbytwo</groupId>
       <version>0.6.0.20150202</version>
     </dependency>
     <dependency>
-      <groupId>com.iodesystems</groupId>
       <artifactId>fn</artifactId>
+      <groupId>com.iodesystems</groupId>
       <version>${fn.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.security</groupId>
       <artifactId>spring-security-oauth2-client</artifactId>
-      <version>${spring-security.version}</version>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-oauth2-jose</artifactId>
       <version>${spring-security.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-security-oauth2-jose</artifactId>
+      <groupId>org.springframework.security</groupId>
+      <version>${spring-security.version}</version>
+    </dependency>
+    <dependency>
       <artifactId>spring-boot-starter-websocket</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-jdbc</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-amqp</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-configuration-processor</artifactId>
-      <version>${spring-boot.version}</version>
+      <groupId>org.springframework.boot</groupId>
       <optional>true</optional>
+      <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
       <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
-      <version>${spring-boot.version}</version>
-      <optional>true</optional>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-actuator</artifactId>
-      <version>${spring-boot.version}</version>
       <optional>true</optional>
+      <version>${spring-boot.version}</version>
     </dependency>
     <dependency>
-      <groupId>com.zaxxer</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <optional>true</optional>
+      <version>${spring-boot.version}</version>
+    </dependency>
+    <dependency>
       <artifactId>HikariCP</artifactId>
+      <groupId>com.zaxxer</groupId>
       <version>${hikari-cp.version}</version>
     </dependency>
   </dependencies>
+  <modelVersion>4.0.0</modelVersion>
+
+  <packaging>war</packaging>
+
+  <parent>
+    <artifactId>webstack</artifactId>
+    <groupId>com.nthalk</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <profiles>
+    <profile>
+      <dependencies>
+        <dependency>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+          <groupId>org.springframework.boot</groupId>
+          <scope>provided</scope>
+          <version>${spring-boot.version}</version>
+        </dependency>
+      </dependencies>
+      <id>war</id>
+    </profile>
+  </profiles>
+
+  <properties>
+    <NPM_BUILD_PHASE>compile</NPM_BUILD_PHASE>
+    <failOnMissingWebXml>false</failOnMissingWebXml>
+  </properties>
 
 </project>

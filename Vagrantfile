@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "ubuntu/bionic64"
 
   # Expose postrgres
   config.vm.network "forwarded_port", guest: 5432, host: 5432
@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
     vb.memory = "1024"
   end
   config.vm.provision "shell", inline: <<-SHELL
-    add-apt-repository "deb https://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main"
+    add-apt-repository "deb https://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main"
     wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
     apt-get update
     apt-get upgrade -y
@@ -74,14 +74,6 @@ EOF
 
     # Make postgres listen to all interfaces
     sed /etc/postgresql/11/main/postgresql.conf -e "s/#listen_addresses = 'localhost'/listen_addresses = '*'/" --in-place
-
-    # Add user and database
-    su -l postgres -c "psql -c 'CREATE DATABASE webstack;'"
-    su -l postgres -c "psql -c 'CREATE USER webstack WITH PASSWORD '\\''webstack'\\'';'"
-    su -l postgres -c "psql -c 'GRANT CONNECT ON DATABASE webstack TO webstack;'"
-    su -l postgres -c "psql -c 'GRANT USAGE ON SCHEMA public TO webstack;'"
-    su -l postgres -c "psql -c 'GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO webstack;'"
-    su -l postgres -c "psql -c 'GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO webstack;'"
 
     # Allow the vagrant host to connect with password
     if [ -z "$(cat /etc/postgresql/11/main/pg_hba.conf | grep '10.0.2.2')" ]; then

@@ -1,106 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <parent>
-    <groupId>com.nthalk</groupId>
-    <artifactId>webstack</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-
   <artifactId>db</artifactId>
 
-  <properties>
-    <jdbc.url>jdbc:postgresql://localhost:5432/webstack</jdbc.url>
-  </properties>
-
   <build>
+    <plugins>
+      <plugin>
+        <artifactId>kotlin-maven-plugin</artifactId>
+        <configuration>
+          <compilerPlugins>
+            <plugin>all-open</plugin>
+            <plugin>spring</plugin>
+          </compilerPlugins>
+          <jvmTarget>1.8</jvmTarget>
+          <pluginOptions>
+            <option>all-open:annotation=com.nthalk.webstack.web.annotations.Open</option>
+          </pluginOptions>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <artifactId>kotlin-maven-allopen</artifactId>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <version>${kotlin.version}</version>
+          </dependency>
+        </dependencies>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+            <id>compile</id>
+            <phase>compile</phase>
+          </execution>
+          <execution>
+            <goals>
+              <goal>test-compile</goal>
+            </goals>
+            <id>test-compile</id>
+            <phase>test-compile</phase>
+          </execution>
+        </executions>
+        <groupId>org.jetbrains.kotlin</groupId>
+        <version>${kotlin.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>jooq-codegen-maven</artifactId>
+        <configuration>
+          <generator>
+            <database>
+              <includes>.*</includes>
+              <inputSchema>public</inputSchema>
+              <name>org.jooq.meta.postgres.PostgresDatabase</name>
+              <outputCatalogToDefault>true</outputCatalogToDefault>
+              <outputSchemaToDefault>true</outputSchemaToDefault>
+            </database>
+            <generate>
+              <deprecated>false</deprecated>
+              <pojos>true</pojos>
+              <records>true</records>
+            </generate>
+            <target>
+              <directory>${project.basedir}/gen/java</directory>
+              <packageName>com.nthalk.webstack.db.models</packageName>
+            </target>
+          </generator>
+          <jdbc>
+            <driver>org.postgresql.Driver</driver>
+            <password>webstack</password>
+            <url>${jdbc.url}</url>
+            <username>webstack</username>
+          </jdbc>
+        </configuration>
+        <groupId>org.jooq</groupId>
+        <version>${jooq.version}</version>
+      </plugin>
+      <plugin>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <configuration>
+              <sources>
+                <source>${project.basedir}/gen/java</source>
+              </sources>
+            </configuration>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <phase>generate-sources</phase>
+          </execution>
+        </executions>
+        <groupId>org.codehaus.mojo</groupId>
+        <version>3.0.0</version>
+      </plugin>
+    </plugins>
     <resources>
       <resource>
         <directory>src/main/resources</directory>
         <filtering>true</filtering>
       </resource>
     </resources>
-    <plugins>
-      <plugin>
-        <groupId>org.jooq</groupId>
-        <artifactId>jooq-codegen-maven</artifactId>
-        <version>${jooq.version}</version>
-        <configuration>
-          <jdbc>
-            <driver>org.postgresql.Driver</driver>
-            <username>webstack</username>
-            <password>webstack</password>
-            <url>${jdbc.url}</url>
-          </jdbc>
-          <generator>
-            <database>
-              <name>org.jooq.meta.postgres.PostgresDatabase</name>
-              <includes>.*</includes>
-              <inputSchema>public</inputSchema>
-              <outputCatalogToDefault>true</outputCatalogToDefault>
-              <outputSchemaToDefault>true</outputSchemaToDefault>
-            </database>
-            <generate>
-              <deprecated>false</deprecated>
-              <records>true</records>
-              <pojos>true</pojos>
-            </generate>
-            <target>
-              <packageName>com.nthalk.webstack.db.models</packageName>
-              <directory>${project.basedir}/gen/java</directory>
-            </target>
-          </generator>
-        </configuration>
-      </plugin>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
-        <executions>
-          <execution>
-            <phase>generate-sources</phase>
-            <goals>
-              <goal>add-source</goal>
-            </goals>
-            <configuration>
-              <sources>
-                <source>${project.basedir}/gen/java</source>
-              </sources>
-            </configuration>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
   </build>
+
   <dependencies>
     <dependency>
-      <groupId>com.offbytwo</groupId>
+      <artifactId>kotlin-stdlib-jdk8</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <version>${kotlin.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>kotlin-reflect</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <version>${kotlin.version}</version>
+    </dependency>
+    <dependency>
+      <artifactId>kotlin-test</artifactId>
+      <groupId>org.jetbrains.kotlin</groupId>
+      <scope>test</scope>
+      <version>${kotlin.version}</version>
+    </dependency>
+
+    <dependency>
       <artifactId>docopt</artifactId>
+      <groupId>com.offbytwo</groupId>
       <version>0.6.0.20150202</version>
     </dependency>
     <dependency>
-      <groupId>org.flywaydb</groupId>
       <artifactId>flyway-core</artifactId>
+      <groupId>org.flywaydb</groupId>
       <version>${flyway.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.jooq</groupId>
       <artifactId>jooq</artifactId>
+      <groupId>org.jooq</groupId>
       <version>${jooq.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
+      <groupId>org.postgresql</groupId>
       <version>${postgres.version}</version>
     </dependency>
     <dependency>
-      <groupId>javax.annotation</groupId>
       <artifactId>javax.annotation-api</artifactId>
-      <version>1.3.2</version>
+      <groupId>javax.annotation</groupId>
       <scope>compile</scope>
+      <version>1.3.2</version>
     </dependency>
   </dependencies>
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <artifactId>webstack</artifactId>
+    <groupId>com.nthalk</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <properties>
+    <jdbc.url>jdbc:postgresql://localhost:5432/webstack</jdbc.url>
+  </properties>
 </project>

@@ -1,42 +1,71 @@
+/* eslint-disable */
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env, argv) => {
+  argv = argv || {mode: 'development'};
   return {
-    mode: argv.mode,
-    devtool: 'source-map',
+    mode: argv.mode ? argv.mode : 'production',
+    devtool: argv.mode === 'production' ? false : 'source-map',
     entry: {
-      main: path.resolve(__dirname, 'src/main/web/index.tsx')
+      boot: path.resolve(__dirname, 'src/main/web/boot.tsx'),
     },
     output: {
-      path: path.resolve(__dirname, "target/classes/web"),
-      filename: 'static/[name].[contenthash].js',
-      chunkFilename: 'static/[name].[contenthash].chunk.js'
+      publicPath: '/',
+      path: path.resolve(__dirname, 'target/classes/web'),
+      filename: '[name].[hash].js',
+      chunkFilename: '[name].[hash].chunk.js',
+    },
+    devServer: {
+      host: '0.0.0.0',
+      disableHostCheck: true,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods':
+            'GET, POST, PUT, DELETE, PATCH, OPTIONS',
+        'Access-Control-Allow-Headers':
+            'X-Requested-With, content-type, Authorization',
+      },
+      proxy: {
+        '/api': 'http://localhost:8080',
+      },
+    },
+    stats: {
+      hash: false,
+      assets: false,
+      children: false,
+      entrypoints: false,
+      builtAt: true,
     },
     module: {
       rules: [
         {
-          test: /\.jsx?$/,
+          enforce: 'pre',
+          test: /\.[jt]sx?$/,
+          loader: 'eslint-loader',
+          options: {
+            fix: true,
+            emitError: true,
+            emitWarning: true,
+          },
+        },
+        {
+          test: /\.[jt]sx?$/,
           loader: 'babel-loader',
-          exclude: /node_modules/
+          exclude: /node_modules/,
+          options: {
+            configFile: path.resolve('.babelrc'),
+          },
         },
         {
-          test: /\.tsx?$/,
-          use: [{
-            loader: 'babel-loader'
-          }],
-          exclude: /node_modules/
+          test: /\.css$/,
+          use: [MiniCssExtractPlugin.loader, 'css-loader'],
         },
         {
-          test: /.webmanifest$|.svg$|.png$/,
-          use: 'file-loader',
+          test: /\.(jpe?g|png|gif|eot|woff|ttf|svg|woff2|ico)$/,
+          loader: 'file-loader',
         },
-        {
-          test: /favicon\.ico$/,
-          use: 'file-loader?name=[name].[ext]',
-        }
-
-      ]
+      ],
     },
     optimization: {
       splitChunks: {
@@ -50,7 +79,8 @@ module.exports = (env, argv) => {
               // get the name. E.g. node_modules/packageName/not/this/part.js
               // or node_modules/packageName
               const packageName = module.context.match(
-                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
+              )[1];
               // npm package names are URL-safe, but some servers don't like @ symbols
               return `npm.${packageName.replace('@', '')}`;
             },
@@ -59,13 +89,28 @@ module.exports = (env, argv) => {
       },
     },
     resolve: {
-      extensions: ['.tsx', '.ts', '.js', '.scss', '.svg',
-        '.webmanifest'],
+      modules: [path.resolve(__dirname, 'node_modules')],
+      extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    },
+    watchOptions: {
+      aggregateTimeout: 1000,
+      poll: 500,
+      ignored: /node_modules/,
     },
     plugins: [
-      new HtmlWebpackPlugin({
-        template: path.resolve(__dirname, 'src/main/web/index.html')
-      })
-    ]
-  }
+      new MiniCssExtractPlugin(),
+      new (require('html-webpack-plugin'))({
+        template: path.resolve(__dirname, 'src/main/web/index.html'),
+      }),
+      new (require('fork-ts-checker-webpack-plugin'))(),
+      new (require('clean-terminal-webpack-plugin'))(),
+    ].concat(
+        argv.mode === 'production'
+            ? [
+              new (require('compression-webpack-plugin'))(),
+              new (require('clean-webpack-plugin').CleanWebpackPlugin)(),
+            ]
+            : []
+    ),
+  };
 };

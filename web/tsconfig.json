@@ -1,16 +1,25 @@
 {
   "compilerOptions": {
     "noEmit": true,
-    "module": "esnext",
-    "moduleResolution": "node",
     "target": "esnext",
-    "allowJs": true,
-    "isolatedModules": true,
+    "module": "commonjs",
     "jsx": "react",
+    "rootDir": "../",
+    "sourceMap": false,
+    "allowJs": true,
+    "keyofStringsOnly": true,
+    "skipDefaultLibCheck": true,
+    "skipLibCheck": true,
     "esModuleInterop": true,
-    "lib": [
-      "dom",
-      "es2015"
-    ]
-  }
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "alwaysStrict": true,
+    "lib": ["dom", "es2015"]
+  },
+
+  "include": ["src/global.d.ts"],
+  "files": ["src/main/web/boot.tsx"],
+  "exclude": ["node_modules/**.*"]
 }
