@@ -5,18 +5,22 @@ This is a starter project for using spring-boot, h2database, jooq, jooq-models, 
    
 ## Developing
 
-    mvn clean install
+    ./vm up
     
-    # Db Tab:
-    ./dbcli start --migrate # <= Run Db server
+    # Ensure clean build
+    mvn clean install
     
     # Dev Tab:
     ./dbcli migrate         # <= Run this when you update migrations
+    ./dbcli --help          # <= Print dbcli help
     ./regen                 # <= Run this when you want to regen models (db/api)
-    ./dev-watch             # <= Watch for changes and rebuild web ui
+    ./regen-db-models       # <= Run this when you want to regen database models
+    ./regen-api-models      # <= Run this when you want to regen api models
+    ./dev-watch             # <= Watch for changes and rebuild web ui (see http://localhost:8081 for live view)
     
     # Server Tab:
-    ./webcli start         # <= Run the webserver
+    ./webcli                # <= Run the webserver
+    ./webcli --help         # <= Print webcli help
     
 
 ## Queues / Messaging

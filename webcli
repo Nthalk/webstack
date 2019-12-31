@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 cd $(dirname "${BASH_SOURCE[0]}")
-mvn -q \
+mvn \
   -pl web \
   compile \
   exec:java \
-  -Dexec.mainClass=com.nthalk.workflow.web.WebCli \
+  -Dexec.mainClass=com.nthalk.webstack.web.App \
   -Dexec.args="$@"
