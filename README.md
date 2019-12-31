@@ -1,7 +1,7 @@
 Starter 
 ========
 
-This is a starter project for using spring-boot, h2database, jooq, jooq-models, spring-webmvc, react, mobx, and typescript.
+This is a starter project for using spring-boot, postgres, jooq, jooq-models, spring-webmvc, generated api models, react, and typescript.
    
 ## Developing
 
