@@ -1,6 +1,7 @@
 /* eslint-disable */
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = (env, argv) => {
   argv = argv || {mode: 'development'};
@@ -39,16 +40,6 @@ module.exports = (env, argv) => {
     },
     module: {
       rules: [
-        {
-          enforce: 'pre',
-          test: /\.[jt]sx?$/,
-          loader: 'eslint-loader',
-          options: {
-            fix: true,
-            emitError: true,
-            emitWarning: true,
-          },
-        },
         {
           test: /\.[jt]sx?$/,
           loader: 'babel-loader',
@@ -99,6 +90,7 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new MiniCssExtractPlugin(),
+        new ESLintPlugin(),
       new (require('html-webpack-plugin'))({
         template: path.resolve(__dirname, 'src/main/web/index.html'),
       }),
